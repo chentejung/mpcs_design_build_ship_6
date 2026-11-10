@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-10",
+  "saved_at": "2026-11-10T09:41",
+  "summary": "Finish and submit DBS A6 by early afternoon, then get most of the AFT assignment done around tonight's DBS class.",
+  "blocks": [
+    { "start": "09:45", "end": "10:15", "title": "Email / admin", "kind": "light" },
+    { "start": "10:15", "end": "10:45", "title": "Book flights home for winter break", "kind": "light", "task_id": "t8" },
+    { "start": "10:45", "end": "12:00", "title": "Update resume with DBS projects", "kind": "light", "task_id": "t6" },
+    { "start": "12:00", "end": "12:30", "title": "DBS A6, part 1", "kind": "focus", "task_id": "t1" },
+    { "start": "12:30", "end": "13:00", "title": "Lunch", "kind": "meal" },
+    { "start": "13:00", "end": "14:30", "title": "DBS A6, part 2: finish + record demo video", "kind": "focus", "task_id": "t1" },
+    { "start": "14:30", "end": "14:40", "title": "Break", "kind": "break" },
+    { "start": "14:40", "end": "15:10", "title": "DBS A6 wrap-up: post demo in #general, submit link in Classroom", "kind": "focus", "task_id": "t1" },
+    { "start": "15:10", "end": "16:40", "title": "AFT assignment, part 1", "kind": "focus", "task_id": "t11" },
+    { "start": "16:40", "end": "16:50", "title": "Break", "kind": "break" },
+    { "start": "16:50", "end": "17:10", "title": "Buffer / head to JCL 390", "kind": "light" },
+    { "start": "17:30", "end": "19:30", "title": "Design, Build, Ship (JCL 390)", "kind": "fixed" },
+    { "start": "19:30", "end": "20:15", "title": "Dinner", "kind": "meal" },
+    { "start": "20:15", "end": "21:45", "title": "AFT assignment, part 2", "kind": "focus", "task_id": "t11" },
+    { "start": "21:45", "end": "21:55", "title": "Break", "kind": "break" },
+    { "start": "21:55", "end": "22:45", "title": "AFT assignment, part 3", "kind": "focus", "task_id": "t11" },
+    { "start": "22:45", "end": "23:30", "title": "Wind down", "kind": "light" }
+  ],
+  "due_soon": [
+    { "title": "DBS Assignment 6: Life Harness + demo video", "due": "2026-11-10T17:30" },
+    { "title": "AFT assignment", "due": "2026-11-11T17:29" },
+    { "title": "Prep for PLUG interview #1", "due": "2026-11-12T15:30" },
+    { "title": "Prep for PLUG interview #2", "due": "2026-11-13T14:00" },
+    { "title": "Web Development assignment", "due": "2026-11-13T17:00" }
+  ],
+  "carried_over": [],
+  "warnings": [
+    "Dinner with Sam (Fri 19:00) clashes with Web Dev class (Fri 17:30-20:30); decision needed",
+    "No swim scheduled yet this week",
+    "About 30 min of AFT left for Wed morning before the 17:29 deadline"
+  ]
+}
