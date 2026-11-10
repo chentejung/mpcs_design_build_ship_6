@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TODAY</title>
+<style>
+  :root { --ink:#000; --paper:#f4f1ea; --yellow:#ffe500; --red:#ff3b1f;
+          --fixed:#000; --focus:#2f5bff; --task:#7a7a7a; --meal:#ff9f1c; --swim:#00c2d1; --prep:#9b6bff;
+          --sans:"Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+          --mono:"JetBrains Mono", "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+          /* type scale: every size on the page comes from these four */
+          --xs:12px; --sm:15px; --md:17px; --xl:48px; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:var(--sm)/1.4 var(--mono); }
+  main { max-width:640px; margin:0 auto; padding:28px 18px 60px; }
+
+  header { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:6px solid var(--ink); padding-bottom:8px; }
+  h1 { font:900 var(--xl)/0.9 "Arial Black", Impact, var(--sans); margin:0; letter-spacing:-.04em; text-transform:uppercase; }
+  .date { font-weight:700; text-transform:uppercase; text-align:right; }
+  .status { font-size:var(--xs); text-transform:uppercase; margin-top:4px; text-align:right; }
+  .status b { background:var(--ink); color:var(--paper); padding:1px 5px; }
+
+  /* ---- Heads up (top) ---- */
+  .heads { margin:24px 0 8px; background:#fff; color:var(--red); border:4px solid var(--red); box-shadow:10px 10px 0 var(--red); }
+  .heads .label { background:var(--red); color:#fff; padding:6px 14px;
+                  font:800 var(--xs)/1 var(--mono); letter-spacing:.15em; text-transform:uppercase; }
+  .heads .row { font-weight:700; border-top-color:var(--red); }
+  .heads .row .mark { background:var(--red); color:#fff; border-color:var(--red); }
+  .heads .row.carried .mark { background:#fff; color:var(--red); }
+  .heads .ok { padding:12px 14px; font:600 var(--md)/1.3 var(--sans); }
+
+  h2 { display:inline-block; margin:34px 0 12px; background:var(--ink); color:var(--paper);
+       padding:3px 8px; font-size:var(--xs); letter-spacing:.15em; text-transform:uppercase; }
+
+  /* ---- Schedule ---- */
+  .block { display:grid; grid-template-columns:104px 1fr; gap:14px; border:3px solid var(--ink); border-left-width:14px;
+           background:#fff; padding:12px 14px; margin-bottom:10px; }
+  .time { font-size:var(--sm); font-weight:800; font-variant-numeric:tabular-nums; }
+  .title { font:700 var(--md)/1.3 var(--sans); }
+  .block.fixed { background:var(--fixed); color:var(--paper); border-color:var(--fixed); }
+  .block.focus { border-left-color:var(--focus); }
+  .block.task  { border-left-color:var(--task); }
+  .block.prep  { border-left-color:var(--prep); }
+  .block.swim  { border-left-color:var(--swim); }
+  .block.meal  { border-left-color:var(--meal); border-width:0 0 0 14px; background:transparent; padding:4px 14px; }
+  .block.meal .title { font-weight:500; font-size:var(--sm); }
+  .block.now   { box-shadow:8px 8px 0 var(--red); transform:translate(-4px,-4px); }
+  .block.now .time::after { content:"NOW"; display:block; width:max-content; margin-top:4px; background:var(--red); color:#fff; padding:1px 6px; font-size:var(--xs); }
+  .block.past  { opacity:.4; }
+  .block.past .title { text-decoration:line-through; }
+
+  .steps { list-style:none; margin:6px 0 0; padding:0; }
+  .steps li { position:relative; padding-left:18px; margin:3px 0; font:500 var(--sm)/1.35 var(--sans); }
+  .steps li::before { content:""; position:absolute; left:2px; top:.5em; width:7px; height:7px; background:currentColor; }
+
+  /* ---- Rows (shared) ---- */
+  .row { display:grid; grid-template-columns:34px 1fr auto; gap:12px; align-items:center;
+         padding:12px 14px; border-top:2px solid var(--ink); font:600 var(--md)/1.3 var(--sans); }
+  .row:first-child { border-top:0; }
+  .row .mark { width:28px; height:28px; display:grid; place-items:center; font:900 var(--sm)/1 var(--mono); border:3px solid var(--ink); }
+
+  /* ---- Due soon ---- */
+  .dues { border:3px solid var(--ink); background:#fff; }
+  .dues .row .mark { background:var(--ink); color:var(--yellow); }
+  .row .when { text-align:right; font:700 var(--sm)/1.25 var(--mono); white-space:nowrap; }
+  .row .when small { display:block; font-size:var(--xs); opacity:.7; }
+  .row.urgent .when { color:var(--red); }
+  .row.urgent .when small { opacity:1; }
+  .toggle { display:block; width:100%; border:0; border-top:3px solid var(--ink); background:var(--ink); color:var(--paper);
+            padding:10px 14px; font:800 var(--xs)/1 var(--mono); letter-spacing:.15em; text-transform:uppercase; cursor:pointer; text-align:left; }
+  .toggle:hover { background:var(--focus); }
+  .dues .none { padding:12px 14px; font:600 var(--md)/1.3 var(--sans); }
+  .empty { margin-top:30px; border:4px dashed var(--ink); padding:40px 20px; text-align:center; font-weight:800; text-transform:uppercase; }
+  @keyframes flash { 0%,30% { background:var(--yellow); } 100% { background:var(--paper); } }
+  body.updated { animation:flash 1.6s steps(4); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Today</h1>
+    <div><div class="date" id="date"></div><div class="status"><b id="status">NO PLAN YET</b></div></div>
+  </header>
+  <div id="content"><div class="empty">No plan saved.<br>Say “good morning” to your harness.</div></div>
+</main>
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtDue = d => d ? new Date(d).toLocaleString([], {weekday:'short', hour:'numeric', minute:'2-digit'}) : 'no date';
+const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+let last = null, plan = null, showAllDues = false;
+
+// Older plans split one task into "part 1 / part 2" blocks; merge back-to-back blocks of the same task.
+function mergeBlocks(blocks) {
+  const out = [];
+  for (const b of blocks.filter(b => b.kind !== 'break')) {
+    const prev = out[out.length - 1];
+    if (prev && b.task_id && prev.task_id === b.task_id) {
+      if (!prev.steps) prev.steps = [prev.title];
+      prev.title = prev.title.replace(/[,:]?\s*(part\s*\d+|wrap-up).*$/i, '');
+      prev.end = b.end;
+      prev.steps = [...prev.steps, ...(b.steps || [b.title])];
+    } else {
+      out.push({ ...b, steps: b.steps ? [...b.steps] : undefined });
+    }
+  }
+  for (const b of out) if (b.steps && b.steps.length === 1 && b.steps[0] === b.title) delete b.steps;
+  return out;
+}
+
+
+function left(at) {
+  const mins = Math.round((at - new Date()) / 60000);
+  if (mins < 0) return 'overdue';
+  const h = Math.floor(mins / 60);
+  return h >= 24 ? `in ${Math.floor(h/24)}d ${h%24}h` : `in ${h}h ${mins%60}m`;
+}
+
+// Top box: only what needs attention (warnings, then carry-overs).
+function headsUp(p) {
+  const rows = [
+    ...(p.warnings || []).slice(0, 3).map(w => `<div class="row"><span class="mark">!</span><span>${esc(w)}</span><span></span></div>`),
+    ...(p.carried_over || []).map(c => `<div class="row carried"><span class="mark">↩</span><span>${esc(c)}</span><span></span></div>`),
+  ];
+  return `<section class="heads"><div class="label">Heads up</div>${rows.length ? rows.join('') : '<div class="ok">Nothing urgent. Follow the plan.</div>'}</section>`;
+}
+
+// Due soon: within 2 days by default, toggle to show the rest.
+function dueSoon(p) {
+  const all = (p.due_soon || []).map(t => ({...t, at:new Date(t.due)})).sort((a,b) => a.at - b.at);
+  if (!all.length) return '';
+  const cutoff = Date.now() + 2*24*3600e3;
+  const soon = all.filter(t => t.at <= cutoff), later = all.filter(t => t.at > cutoff);
+  const row = t => `<div class="row ${t.at - Date.now() < 24*3600e3 ? 'urgent' : ''}"><span class="mark">⏱</span><span>${esc(t.title)}</span>
+      <span class="when">${esc(fmtDue(t.due))}<small>${left(t.at)}</small></span></div>`;
+  const shown = showAllDues ? all : soon;
+  const btn = later.length ? `<button class="toggle" id="dueToggle">${showAllDues ? '▲ Next 2 days only' : `▼ Show ${later.length} more`}</button>` : '';
+  return `<h2>Due soon</h2><div class="dues">${shown.length ? shown.map(row).join('') : '<div class="none">Nothing due in the next 2 days.</div>'}${btn}</div>`;
+}
+
+function render() {
+  const p = plan;
+  document.getElementById('date').textContent = new Date(p.date + 'T00:00').toLocaleDateString([], {weekday:'long', month:'short', day:'numeric'});
+  const now = new Date(), nowMin = now.getHours()*60 + now.getMinutes();
+  const isToday = p.date === now.toLocaleDateString('en-CA');
+  const blocks = mergeBlocks(p.blocks || []);
+
+  const html = blocks.map((b, i) => {
+    let state = '';
+    if (isToday && toMin(b.end) <= nowMin) state = 'past';
+    else if (isToday && toMin(b.start) <= nowMin && nowMin < toMin(b.end)) state = 'now';
+    const steps = b.steps || [];
+    const checklist = steps.length ? `<ul class="steps">${steps.map(s =>
+      `<li>${esc(s)}</li>`).join('')}</ul>` : '';
+    return `<div class="block ${esc(b.kind)} ${state}">
+      <div class="time">${esc(b.start)}–${esc(b.end)}</div>
+      <div><div class="title">${esc(b.title)}</div>${checklist}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('content').innerHTML = headsUp(p) + dueSoon(p) + `<h2>Schedule</h2>${html}`;
+  const t = document.getElementById('dueToggle');
+  if (t) t.addEventListener('click', () => { showAllDues = !showAllDues; render(); });
+
+  document.getElementById('status').textContent =
+    'SAVED ' + (p.saved_at ? new Date(p.saved_at).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : '') + ' · LIVE';
+}
+
+async function poll() {
+  try {
+    const r = await fetch('../plans/today.json', { cache: 'no-store' });
+    if (!r.ok) return;
+    const text = await r.text();
+    if (text === last) return;
+    const first = last === null;
+    last = text; plan = JSON.parse(text);
+    render();
+    if (!first) { document.body.classList.remove('updated'); void document.body.offsetWidth; document.body.classList.add('updated'); }
+  } catch (e) { /* no plan yet or mid-write; retry */ }
+}
+poll();
+setInterval(poll, 2000);
+setInterval(() => plan && render(), 60000);
+</script>
+</body>
+</html>
