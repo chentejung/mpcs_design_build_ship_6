@@ -1,0 +1,84 @@
+{
+  "source": "Made-up task list export (read-only)",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "DBS Assignment 6: Life Harness + demo video",
+      "course": "MPCS 51238",
+      "due": "2026-11-10T17:30",
+      "estimate_hours": 4,
+      "priority": "high",
+      "status": "in-progress",
+      "notes": "Post demo in #general, submit link in Google Classroom"
+    },
+    {
+      "id": "t11",
+      "title": "AFT assignment",
+      "course": "Applied Financial Technology",
+      "due": "2026-11-11T17:29",
+      "estimate_hours": 4.5,
+      "priority": "high",
+      "status": "not-started",
+      "notes": "Usually 4-5 hrs"
+    },
+    {
+      "id": "t13",
+      "title": "Prep for PLUG interview #1",
+      "course": null,
+      "due": "2026-11-12T15:30",
+      "estimate_hours": 0.75,
+      "priority": "high",
+      "status": "not-started",
+      "notes": "Block right before the interview"
+    },
+    {
+      "id": "t14",
+      "title": "Prep for PLUG interview #2",
+      "course": null,
+      "due": "2026-11-13T14:00",
+      "estimate_hours": 0.75,
+      "priority": "high",
+      "status": "not-started",
+      "notes": "Block right before the interview"
+    },
+    {
+      "id": "t12",
+      "title": "Web Development assignment",
+      "course": "Web Development",
+      "due": "2026-11-13T17:00",
+      "estimate_hours": 3.5,
+      "priority": "high",
+      "status": "not-started",
+      "notes": "Usually 3-4 hrs"
+    },
+    {
+      "id": "t9",
+      "title": "Laundry + groceries",
+      "course": null,
+      "due": "2026-11-14T23:59",
+      "estimate_hours": 1.5,
+      "priority": "low",
+      "status": "not-started"
+    },
+    {
+      "id": "t6",
+      "title": "Apply: 3 summer internship postings",
+      "course": null,
+      "due": "2026-11-15T23:59",
+      "estimate_hours": 2,
+      "priority": "medium",
+      "status": "not-started",
+      "notes": "Update resume with DBS projects first"
+    },
+    {
+      "id": "t8",
+      "title": "Book flights home for winter break",
+      "course": null,
+      "due": "2026-11-20T23:59",
+      "estimate_hours": 0.5,
+      "priority": "medium",
+      "status": "not-started",
+      "notes": "Prices go up after Thanksgiving"
+    }
+  ]
+}

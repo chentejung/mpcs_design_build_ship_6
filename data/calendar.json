@@ -1,0 +1,74 @@
+{
+  "source": "Made-up calendar export (read-only)",
+  "timezone": "America/Chicago",
+  "events": [
+    {
+      "id": "e1",
+      "title": "Design, Build, Ship (MPCS 51238)",
+      "start": "2026-11-10T17:30",
+      "end": "2026-11-10T19:30",
+      "location": "JCL 390",
+      "type": "class",
+      "recurring": "weekly Tue"
+    },
+    {
+      "id": "e15",
+      "title": "Applied Financial Technology",
+      "start": "2026-11-11T17:30",
+      "end": "2026-11-11T20:30",
+      "location": "TBD",
+      "type": "class",
+      "recurring": "weekly Wed"
+    },
+    {
+      "id": "e17",
+      "title": "PLUG intern interview",
+      "start": "2026-11-12T15:30",
+      "end": "2026-11-12T16:00",
+      "location": "Zoom",
+      "type": "interview"
+    },
+    {
+      "id": "e18",
+      "title": "PLUG intern interview",
+      "start": "2026-11-13T14:00",
+      "end": "2026-11-13T15:00",
+      "location": "Zoom",
+      "type": "interview"
+    },
+    {
+      "id": "e16",
+      "title": "Web Development",
+      "start": "2026-11-13T17:30",
+      "end": "2026-11-13T20:30",
+      "location": "TBD",
+      "type": "class",
+      "recurring": "weekly Fri"
+    },
+    {
+      "id": "e12",
+      "title": "Dinner with Sam",
+      "start": "2026-11-13T19:00",
+      "end": "2026-11-13T21:00",
+      "location": "Medici",
+      "type": "personal"
+    },
+    {
+      "id": "e13",
+      "title": "Dentist",
+      "start": "2026-11-14T10:00",
+      "end": "2026-11-14T11:00",
+      "location": "Hyde Park Dental",
+      "type": "personal"
+    },
+    {
+      "id": "e14",
+      "title": "Call home",
+      "start": "2026-11-15T18:00",
+      "end": "2026-11-15T19:00",
+      "location": "Phone",
+      "type": "personal",
+      "recurring": "weekly Sun"
+    }
+  ]
+}
